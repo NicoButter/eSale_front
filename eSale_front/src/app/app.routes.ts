@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { HeroComponent } from './hero/hero';
-import { LoginComponent } from './login/login';
-import { RegisterComponent } from './register/register';
+import { Hero } from './hero/hero';
+import { Login } from './login/login';
+import { Register } from './register/register';
 
 export const routes: Routes = [
-  { path: '', component: HeroComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: Hero },
+  { path: 'login', component: Login },
+  { path: 'register', component: Register },
   { path: '**', redirectTo: '' } // Redirige rutas no encontradas a la landing
 ];

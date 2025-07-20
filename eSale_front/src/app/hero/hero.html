@@ -10,4 +10,44 @@
       <button mat-raised-button color="primary" routerLink="/products">Explorar Productos</button>
     </mat-card-actions>
   </mat-card>
+
+  <div class="featured-section" *ngIf="featuredProducts.length > 0">
+    <h2>Productos Destacados</h2>
+    <div class="product-grid">
+      <mat-card *ngFor="let product of featuredProducts">
+        <mat-card-header>
+          <mat-card-title>{{ product.marca.nombre }} {{ product.modelo }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="{{ product.modelo }}" class="product-image">
+          <p>{{ product.descripcion }}</p>
+          <p>Precio: ${{ product.precioSinIVA }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">Añadir al carrito</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="offers-section" *ngIf="offers.length > 0">
+    <h2>Ofertas Especiales</h2>
+    <div class="product-grid">
+      <mat-card *ngFor="let product of offers">
+        <mat-card-header>
+          <mat-card-title>{{ product.marca.nombre }} {{ product.modelo }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="{{ product.modelo }}" class="product-image">
+          <p>{{ product.descripcion }}</p>
+          <p>Precio original: ${{ product.precioSinIVA }}</p>
+          <p *ngIf="product.rebaja?.porcentajeDescuento">Descuento: {{ product.rebaja?.porcentajeDescuento }}%</p>
+          <p *ngIf="product.rebaja?.porcentajeDescuento">Precio con descuento: ${{ getDiscountedPrice(product) | number:'1.2-2' }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">Añadir al carrito</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </section>
