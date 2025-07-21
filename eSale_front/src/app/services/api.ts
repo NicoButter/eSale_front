@@ -7,16 +7,23 @@ export interface Marca {
   nombre: string;
 }
 
-export interface Product {
+export interface Articulo {
   id: number;
   codigo: string;
-  marca: Marca;
   modelo: string;
   precioSinIVA: number;
   descripcion: string;
   stock: number;
   imageUrl?: string;
-  rebaja?: { porcentajeDescuento?: number };
+  marcaNombre?: string;
+  marca?: Marca;
+}
+
+export interface ProductoDestacado {
+  id: number; // id del destacado
+  articulo: Articulo;
+  fechaInicio: string;
+  fechaFin: string;
 }
 
 @Injectable({
@@ -25,13 +32,14 @@ export interface Product {
 export class ApiService {
   private apiUrl = '/articulos';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getArticulosDestacados(): Observable<Product[]> {
-  return this.http.get<Product[]>(`${this.apiUrl}/destacados`);
-}
+  getArticulosDestacados(): Observable<ProductoDestacado[]> {
+    return this.http.get<ProductoDestacado[]>(`${this.apiUrl}/destacados`);
+  }
 
   // getProductsWithOffers(): Observable<Product[]> {
   //   return this.http.get<Product[]>(`${this.apiUrl}/offers`);
   // }
+  
 }

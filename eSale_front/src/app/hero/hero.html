@@ -6,29 +6,21 @@
     <mat-card-content>
       <p>Descubre la mejor tienda online de electrónica con ofertas increíbles.</p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" routerLink="/products">Explorar Productos</button>
-    </mat-card-actions>
   </mat-card>
 
-  <div class="featured-section" *ngIf="featuredProducts.length > 0">
-    <h2>Productos Destacados</h2>
-    <div class="product-grid">
-      <mat-card *ngFor="let product of featuredProducts">
-        <mat-card-header>
-          <mat-card-title>{{ product.marca.nombre }} {{ product.modelo }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="{{ product.modelo }}" class="product-image">
-          <p>{{ product.descripcion }}</p>
-          <p>Precio: ${{ product.precioSinIVA }}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary">Añadir al carrito</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
+ <mat-card *ngFor="let product of featuredProducts">
+  <mat-card-header>
+    <mat-card-title>{{ product.articulo.marcaNombre }} {{ product.articulo.modelo }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <img *ngIf="product.articulo.imageUrl" [src]="product.articulo.imageUrl" alt="{{ product.articulo.modelo }}" class="product-image">
+      <p>{{ product.articulo.descripcion }}</p>
+      <p>Precio: ${{ product.articulo.precioSinIVA }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary">Añadir al carrito</button>
+    </mat-card-actions>
+</mat-card>
 
   <!-- <div class="offers-section" *ngIf="offers.length > 0">
     <h2>Ofertas Especiales</h2>
