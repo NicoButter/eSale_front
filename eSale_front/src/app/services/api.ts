@@ -16,7 +16,7 @@ export interface Product {
   descripcion: string;
   stock: number;
   imageUrl?: string;
-  rebaja?: { porcentajeDescuento?: number }; // Ajustado para reflejar Rebaja
+  rebaja?: { porcentajeDescuento?: number };
 }
 
 @Injectable({
@@ -27,11 +27,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getFeaturedProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/featured`);
-  }
+  getArticulosDestacados(): Observable<Product[]> {
+  return this.http.get<Product[]>(`${this.apiUrl}/destacados`);
+}
 
-  getProductsWithOffers(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/offers`);
-  }
+  // getProductsWithOffers(): Observable<Product[]> {
+  //   return this.http.get<Product[]>(`${this.apiUrl}/offers`);
+  // }
 }

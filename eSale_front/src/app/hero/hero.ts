@@ -19,19 +19,19 @@ export class Hero implements OnInit { // Confirmar que es 'Hero', no 'HeroCompon
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.getFeaturedProducts().subscribe({
+    this.apiService.getArticulosDestacados().subscribe({
       next: (products) => {
         this.featuredProducts = products;
       },
       error: (error) => console.error('Error al cargar productos destacados:', error)
     });
 
-    this.apiService.getProductsWithOffers().subscribe({
-      next: (products) => {
-        this.offers = products;
-      },
-      error: (error) => console.error('Error al cargar ofertas:', error)
-    });
+    // this.apiService.getProductsWithOffers().subscribe({
+    //   next: (products) => {
+    //     this.offers = products;
+    //   },
+    //   error: (error) => console.error('Error al cargar ofertas:', error)
+    // });
   }
 
   getDiscountedPrice(product: Product): number {
