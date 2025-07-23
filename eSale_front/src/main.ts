@@ -1,6 +1,18 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { App } from './app/app';
+// app.config.ts
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
+import { routes } from './app/app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(
+      withXsrfConfiguration({
+        cookieName: 'XSRF-TOKEN',       // Nombre de la cookie que Spring Boot envia
+        headerName: 'X-XSRF-TOKEN'      // Nombre del header que Angular manda
+      })
+    )
+  ]
+};
