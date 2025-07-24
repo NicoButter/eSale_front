@@ -8,3 +8,26 @@ mat-card {
   max-width: 600px;
   text-align: center;
 }
+
+.welcome-banner {
+  margin: 20px auto;
+  max-width: 900px;
+  text-align: center;
+}
+
+.banner-card {
+  background: linear-gradient(to right, #ff8a00, #e52e71);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.banner-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.banner-text {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}

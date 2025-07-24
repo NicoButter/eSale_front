@@ -1,45 +1,37 @@
-<section class="hero">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>¡Bienvenido a eSale!</mat-card-title>
-    </mat-card-header>
+<section class="welcome-banner">
+  <mat-card class="banner-card">
+    <mat-card-title class="banner-title">¡Bienvenido a eSale!</mat-card-title>
     <mat-card-content>
-      <p>Descubre la mejor tienda online de electrónica con ofertas increíbles.</p>
+      <p class="banner-text">
+        🔥 Las mejores rebajas del año te esperan. Encontrá tus productos favoritos al mejor precio. ¡Apurate antes que vuelen! 🛒
+      </p>
     </mat-card-content>
   </mat-card>
+</section>
 
- <mat-card *ngFor="let product of featuredProducts">
-  <mat-card-header>
-    <mat-card-title>{{ product.articulo.marcaNombre }} {{ product.articulo.modelo }}</mat-card-title>
+<section class="hero">
+  <mat-card *ngFor="let product of featuredProducts">
+    <mat-card-header>
+      <mat-card-title>
+        {{ product.articulo.marcaNombre }} {{ product.articulo.modelo }}
+      </mat-card-title>
     </mat-card-header>
+
     <mat-card-content>
-      <img *ngIf="product.articulo.imageUrl" [src]="product.articulo.imageUrl" alt="{{ product.articulo.modelo }}" class="product-image">
+      <img
+        *ngIf="product.articulo.imageUrl"
+        [src]="product.articulo.imageUrl"
+        alt="{{ product.articulo.modelo }}"
+        class="product-image"
+      />
       <p>{{ product.articulo.descripcion }}</p>
       <p>Precio: ${{ product.articulo.precioSinIVA }}</p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button color="primary">Añadir al carrito</button>
-    </mat-card-actions>
-</mat-card>
 
-  <!-- <div class="offers-section" *ngIf="offers.length > 0">
-    <h2>Ofertas Especiales</h2>
-    <div class="product-grid">
-      <mat-card *ngFor="let product of offers">
-        <mat-card-header>
-          <mat-card-title>{{ product.marca.nombre }} {{ product.modelo }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="{{ product.modelo }}" class="product-image">
-          <p>{{ product.descripcion }}</p>
-          <p>Precio original: ${{ product.precioSinIVA }}</p>
-          <p *ngIf="product.rebaja?.porcentajeDescuento">Descuento: {{ product.rebaja?.porcentajeDescuento }}%</p>
-          <p *ngIf="product.rebaja?.porcentajeDescuento">Precio con descuento: ${{ getDiscountedPrice(product) | number:'1.2-2' }}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary">Añadir al carrito</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div> -->
+    <mat-card-actions>
+      <button *ngIf="mostrarBoton()" mat-button color="primary">
+        Añadir al carrito
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </section>
