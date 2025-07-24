@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXsrfConfiguration } from '@angular/common/http';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -8,6 +8,12 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withXsrfConfiguration({
+        cookieName: 'XSRF-TOKEN', // Nombre de la cookie que Spring Boot envía
+        headerName: 'X-XSRF-TOKEN' // Nombre del header que Angular manda
+      })
+    )
   ]
 };
