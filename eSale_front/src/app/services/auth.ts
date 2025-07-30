@@ -1,19 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
-
-export interface LoginRequestDTO {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponseDTO {
-  token: string;
-  user: any;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +10,12 @@ export interface LoginResponseDTO {
 export class AuthService {
   private authUrl = 'http://localhost:8080/usuarios/login';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  private nombreSubject = new BehaviorSubject<string | null>(localStorage.getItem('nombre'));
+  nombre$ = this.nombreSubject.asObservable();
 
-  login(r: any): Observable<any> {
+  constructor(private http: HttpClient, private router: Router) {}
+
+  login(r: { email: string; password: string }): Observable<any> {
     return this.http.post(this.authUrl, r).pipe(
       tap((i: any) => {
         if (!i?.rol) {
@@ -34,6 +26,7 @@ export class AuthService {
         localStorage.setItem("rol", i.rol);
         localStorage.setItem("usuario", i.email);
         localStorage.setItem("nombre", i.nombre);
+        this.nombreSubject.next(i.nombre); // 👈 importante
 
         if (i.rol === 'ADMIN') {
           this.router.navigate(['/dashboard-admin']);
@@ -46,8 +39,20 @@ export class AuthService {
     );
   }
 
+  logout(): void {
+    localStorage.clear();
+    this.nombreSubject.next(null);
+
+    fetch('http://localhost:8080/usuarios/logout', {
+      method: 'POST',
+      credentials: 'include'
+    }).finally(() => {
+      this.router.navigate(['/login']);
+    });
+  }
+
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('rol');
   }
 
   getUserRole(): string | null {
@@ -61,6 +66,4 @@ export class AuthService {
   register(userData: any): Observable<any> {
     return this.http.post('http://localhost:8080/usuarios/register', userData);
   }
-
 }
-

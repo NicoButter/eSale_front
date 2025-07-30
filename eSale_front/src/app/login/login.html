@@ -1,25 +1,29 @@
 <div class="login">
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
+    <mat-card-header class="login-header">
+      <img class="login-logo" src="assets/logo.svg" alt="Logo" />
+      <mat-card-title>Iniciar Sesión</mat-card-title>
     </mat-card-header>
+
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput type="email" required [(ngModel)]="email" name="email">
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Contraseña</mat-label>
           <input matInput type="password" required [(ngModel)]="password" name="password">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+        <button mat-raised-button color="primary" type="submit">Entrar</button>
       </form>
     </mat-card-content>
+
     <mat-card-actions>
-      <button mat-button (click)="goToLanding()">Volver a Inicio</button>
+      <button mat-button (click)="goToLanding()">← Volver al inicio</button>
     </mat-card-actions>
   </mat-card>
 </div>
+  

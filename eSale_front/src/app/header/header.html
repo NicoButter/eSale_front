@@ -1,6 +1,16 @@
-<mat-toolbar color="primary">
-  <span>eSale</span>
+<mat-toolbar class="header">
+  <span class="header-title">eSale</span>
   <span class="spacer"></span>
-  <a mat-button routerLink="/login">Login</a>
-  <a mat-button routerLink="/register">Register</a>
+
+  @if (nombre; as user) {
+    <div class="user-info">
+      <span>Bienvenido, {{ user }}</span>
+      <button class="logout-button" (click)="logout()">Cerrar sesión</button>
+    </div>
+  } @else {
+    <div class="auth-links">
+      <a class="auth-button" mat-button routerLink="/login">Login</a>
+      <a class="auth-button" mat-button routerLink="/register">Register</a>
+    </div>
+  }
 </mat-toolbar>

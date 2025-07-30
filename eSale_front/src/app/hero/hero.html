@@ -1,16 +1,18 @@
 <section class="welcome-banner">
   <mat-card class="banner-card">
-    <mat-card-title class="banner-title">¡Bienvenido a eSale!</mat-card-title>
+    <mat-card-title class="banner-title">
+      ¡Bienvenido a <span class="highlight">eSale</span>!
+    </mat-card-title>
     <mat-card-content>
       <p class="banner-text">
-        🔥 Las mejores rebajas del año te esperan. Encontrá tus productos favoritos al mejor precio. ¡Apurate antes que vuelen! 🛒
+        🔥 Aprovechá estas <strong>ofertas únicas</strong> del año. Encontrá tus productos favoritos al mejor precio. ¡Apurate antes de que vuelen! 🛒
       </p>
     </mat-card-content>
   </mat-card>
 </section>
 
 <section class="hero">
-  <mat-card *ngFor="let product of featuredProducts">
+  <mat-card *ngFor="let product of featuredProducts" class="product-card">
     <mat-card-header>
       <mat-card-title>
         {{ product.articulo.marcaNombre }} {{ product.articulo.modelo }}
@@ -24,12 +26,12 @@
         alt="{{ product.articulo.modelo }}"
         class="product-image"
       />
-      <p>{{ product.articulo.descripcion }}</p>
-      <p>Precio: ${{ product.articulo.precioSinIVA }}</p>
+      <p class="description">{{ product.articulo.descripcion }}</p>
+      <p class="price">💰 Precio: ${{ product.articulo.precioSinIVA }}</p>
     </mat-card-content>
 
-    <mat-card-actions>
-      <button *ngIf="mostrarBoton()" mat-button color="primary">
+    <mat-card-actions align="end">
+      <button *ngIf="mostrarBoton()" mat-flat-button color="primary">
         Añadir al carrito
       </button>
     </mat-card-actions>

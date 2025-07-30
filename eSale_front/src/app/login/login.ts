@@ -24,17 +24,17 @@ export class Login {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   goToLanding() {
     this.router.navigate(['/']);
   }
 
   onSubmit() {
-    this.authService.login(this.email, this.password).subscribe({
-      next: (response) => {
-        console.log('Login exitoso', response);
-        this.router.navigate(['/dashboard']);
+    this.authService.login({ email: this.email, password: this.password }).subscribe({
+      next: () => {
+        console.log('Login exitoso');
+        // El login() redirige al dashboard
       },
       error: (error) => {
         console.error('Error en login:', error);

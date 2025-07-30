@@ -1,7 +1,7 @@
 $primary-color: #3f51b5;
 $background-gradient: linear-gradient(to right, #e0eafc, #cfdef3);
 $card-radius: 1rem;
-$shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+$shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 
 .register {
   display: flex;
@@ -13,22 +13,29 @@ $shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 
   mat-card {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     padding: 2rem;
-    box-shadow: $shadow;
     border-radius: $card-radius;
-    background-color: white;
+    box-shadow: $shadow;
+    background-color: #fff;
     animation: fadeInUp 0.5s ease;
 
-    mat-card-header {
-      justify-content: center;
+    .register-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .register-logo {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 0.5rem;
+      }
 
       mat-card-title {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
         font-weight: 600;
         color: $primary-color;
-        text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
       }
     }
 
@@ -42,11 +49,11 @@ $shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
           margin-bottom: 1rem;
         }
 
-        button[type='submit'] {
+        button[type="submit"] {
           width: 100%;
           padding: 0.8rem;
-          font-weight: bold;
           font-size: 1rem;
+          font-weight: 600;
         }
       }
     }
@@ -64,7 +71,6 @@ $shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 }
 
-// ✨ Animación para darle vida
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -76,14 +82,18 @@ $shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 }
 
-// 📱 Responsive para móviles
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .register {
     mat-card {
-      padding: 1rem;
+      padding: 1.5rem;
 
-      mat-card-header mat-card-title {
-        font-size: 1.5rem;
+      .register-logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      mat-card-title {
+        font-size: 1.4rem;
       }
     }
   }

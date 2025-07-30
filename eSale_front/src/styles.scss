@@ -1,9 +1,18 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
-main {
-    min-height: calc(100vh - 64px - 64px); // Ajusta según la altura del header y footer
+
+app-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
 }
