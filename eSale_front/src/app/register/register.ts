@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { UsuarioService } from '../services/usuario';
+import { AuthService } from '../services/auth';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
 export class Register {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       dni: ['', Validators.required],
@@ -39,7 +39,7 @@ export class Register {
 
   onSubmit() {
     if (this.form.valid) {
-      this.usuarioService.register(this.form.value).subscribe({
+      this.authService.register(this.form.value).subscribe({
         next: () => {
           alert('Registro exitoso. ¡Ahora podés iniciar sesión!');
           this.router.navigate(['/login']);

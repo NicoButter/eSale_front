@@ -1,9 +1,90 @@
+$primary-color: #3f51b5;
+$background-gradient: linear-gradient(to right, #e0eafc, #cfdef3);
+$card-radius: 1rem;
+$shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
 .register {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  min-height: 100vh;
+  background: $background-gradient;
+  padding: 2rem;
+
+  mat-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    box-shadow: $shadow;
+    border-radius: $card-radius;
+    background-color: white;
+    animation: fadeInUp 0.5s ease;
+
+    mat-card-header {
+      justify-content: center;
+
+      mat-card-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+    }
+
+    mat-card-content {
+      form {
+        display: flex;
+        flex-direction: column;
+
+        mat-form-field {
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+
+        button[type='submit'] {
+          width: 100%;
+          padding: 0.8rem;
+          font-weight: bold;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    mat-card-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+
+      button {
+        font-size: 0.9rem;
+        color: $primary-color;
+      }
+    }
+  }
 }
-mat-card {
-  max-width: 400px;
-  text-align: center;
+
+// ✨ Animación para darle vida
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 📱 Responsive para móviles
+@media (max-width: 400px) {
+  .register {
+    mat-card {
+      padding: 1rem;
+
+      mat-card-header mat-card-title {
+        font-size: 1.5rem;
+      }
+    }
+  }
 }

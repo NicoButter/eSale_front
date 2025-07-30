@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
 
 export interface LoginRequestDTO {
   email: string;
@@ -9,27 +11,40 @@ export interface LoginRequestDTO {
 }
 
 export interface LoginResponseDTO {
-  token: string; // si el backend devuelve un token JWT
-  user: any; // tiparlo mejor si hace falta
+  token: string;
+  user: any;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private authUrl = 'http://localhost:8080/login';
+  private authUrl = 'http://localhost:8080/usuarios/login';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  login(email: string, password: string): Observable<any> {
-  const loginData = { email, password };
-  return this.http.post<LoginResponseDTO>(this.authUrl, loginData).pipe(
-    tap(response => {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('rol', response.user.rol);
-    })
-  );
-}
+  login(r: any): Observable<any> {
+    return this.http.post(this.authUrl, r).pipe(
+      tap((i: any) => {
+        if (!i?.rol) {
+          console.error("Login sin rol, respuesta inválida:", i);
+          return;
+        }
+
+        localStorage.setItem("rol", i.rol);
+        localStorage.setItem("usuario", i.email);
+        localStorage.setItem("nombre", i.nombre);
+
+        if (i.rol === 'ADMIN') {
+          this.router.navigate(['/dashboard-admin']);
+        } else if (i.rol === 'CLIENTE') {
+          this.router.navigate(['/dashboard-cliente']);
+        } else {
+          console.warn("Rol desconocido:", i.rol);
+        }
+      })
+    );
+  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
@@ -41,6 +56,10 @@ export class AuthService {
 
   isCliente(): boolean {
     return this.getUserRole() === 'cliente';
+  }
+
+  register(userData: any): Observable<any> {
+    return this.http.post('http://localhost:8080/usuarios/register', userData);
   }
 
 }
